@@ -13,7 +13,7 @@
 # 修改默认 IP 地址
 # 使用 sed 命令修改默认 IP 地址，将 192.168.1.1 替换为 192.168.50.5
 # 注意：此行目前被注释掉，默认 IP 修改功能未启用。如果需要修改默认 IP，请移除行首的 '#' 符号。
-# sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
 
 ##-----------------删除重复软件包------------------
 # 删除重复的软件包，这里是删除 open-app-filter 软件包
@@ -27,30 +27,30 @@ rm -rf feeds/packages/net/open-app-filter
 #   -m 30: 设置最大下载时间为 30 秒
 #   --retry 2: 下载失败重试 2 次
 #   -o /tmp/clash.tar.gz:  将下载的文件保存为 /tmp/clash.tar.gz
-curl -sL -m 30 --retry 2 https://raw.githubusercontent.com/vernesong/OpenClash/core/master/dev/clash-linux-arm64.tar.gz -o /tmp/clash.tar.gz
+# curl -sL -m 30 --retry 2 https://raw.githubusercontent.com/vernesong/OpenClash/core/master/dev/clash-linux-arm64.tar.gz -o /tmp/clash.tar.gz
 
 # 解压下载的 clash.tar.gz 压缩包到 /tmp 目录
 # 使用 tar 命令解压，参数说明：
 #   zxvf: z (gzip 格式), x (解压), v (显示详细信息), f (指定文件)
 #   -C /tmp: 解压到 /tmp 目录
 #   >/dev/null 2>&1:  将标准输出和标准错误输出重定向到 /dev/null，静默输出
-tar zxvf /tmp/clash.tar.gz -C /tmp >/dev/null 2>&1
+# tar zxvf /tmp/clash.tar.gz -C /tmp >/dev/null 2>&1
 
 # 给解压后的 /tmp/clash 文件添加可执行权限
 # 使用 chmod 命令修改权限，参数说明：
 #   +x: 添加可执行权限
 #   >/dev/null 2>&1: 静默输出
-chmod +x /tmp/clash >/dev/null 2>&1
+# chmod +x /tmp/clash >/dev/null 2>&1
 
 # 创建目录 feeds/luci/applications/luci-app-openclash/root/etc/openclash/core，用于存放 clash 核心文件
 # 使用 mkdir 命令创建目录，参数说明：
 #   -p: 递归创建目录，如果父目录不存在也一并创建
-mkdir -p feeds/luci/applications/luci-app-openclash/root/etc/openclash/core
+# mkdir -p feeds/luci/applications/luci-app-openclash/root/etc/openclash/core
 
 # 将 /tmp/clash 文件移动到 luci-app-openclash 软件包的 core 目录，并重命名为 clash
 # 使用 mv 命令移动文件，参数说明：
 #   >/dev/null 2>&1: 静默输出
-mv /tmp/clash feeds/luci/applications/luci-app-openclash/root/etc/openclash/core/clash >/dev/null 2>&1
+# mv /tmp/clash feeds/luci/applications/luci-app-openclash/root/etc/openclash/core/clash >/dev/null 2>&1
 
 # 删除下载的压缩包文件 /tmp/clash.tar.gz，清理临时文件
 # 使用 rm 命令删除文件，参数说明：
@@ -66,7 +66,7 @@ rm -rf /tmp/clash.tar.gz >/dev/null 2>&1
 #     '/myddns_ipv4/,$': 地址范围，从匹配到 'myddns_ipv4' 的行开始到文件末尾 ($)
 #     d: 删除命令，删除匹配地址范围内的行
 #   feeds/packages/net/ddns-scripts/files/etc/config/ddns: 要修改的文件路径
-sed -i '/myddns_ipv4/,$d' feeds/packages/net/ddns-scripts/files/etc/config/ddns
+# sed -i '/myddns_ipv4/,$d' feeds/packages/net/ddns-scripts/files/etc/config/ddns
 
 ##-----------------手动设置 MT7981B 的 CPU 频率-----------------
 # 手动设置 MT7981B 设备的 CPU 频率为 1.3GHz
